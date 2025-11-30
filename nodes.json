@@ -1,0 +1,26 @@
+[
+  {
+    "id": "A1",
+    "latencyMs": 22,
+    "packetLoss": 0.1,
+    "status": "OK"
+  },
+  {
+    "id": "B4",
+    "latencyMs": 110,
+    "packetLoss": 2.5,
+    "status": "WARN"
+  },
+  {
+    "id": "C9",
+    "latencyMs": 300,
+    "packetLoss": 5.0,
+    "status": "ERROR"
+  },
+  {
+    "id": "D2",
+    "latencyMs": 45,
+    "packetLoss": 0.0,
+    "status": "OK"
+  }
+]
