@@ -10,12 +10,14 @@ import javax.management.RuntimeErrorException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import App.Main;
 import Models.NodeClass;
 
 public class NodeService {
-	private final NodeClass myNode = new NodeClass(); 
+
 	private double healthScore; 
 	private String healthStatus;
+	
 
 	//load nodes
 	public List<NodeClass> loadNodes(String filePath){
@@ -53,8 +55,8 @@ public class NodeService {
 		
 		//calculation
 		healthScore = 100
-					 - myNode.getLatencyMs() *0.1
-					 - myNode.getPacketLoss()
+					 - node.getLatencyMs() *0.1
+					 - node.getPacketLoss()
 					 -penalty;
 							
 		return healthScore;
@@ -70,6 +72,19 @@ public class NodeService {
 			healthStatus = "CRITICAL";
 		}		
 		return healthStatus;		
+	}
+	
+	//print the results 
+	public void printResults(List<NodeClass> nodes) {
+		System.out.println("NODES LOADED SUCCESSFULLY: " + nodes.size());
+		System.out.println("           NODE HEALTH RESULTS                 ");
+		System.out.println("|    ID    |  Health Score  |  Health Status  |");
+		for(NodeClass node: nodes) {
+			double score = calculateHealthScore(node);
+			String status = healthStatus(score); 
+			
+			System.out.println("|   " + node.getId() + "     |      " + score + "      |    " + status + "     |");
+		}
 	}
 	
 	
