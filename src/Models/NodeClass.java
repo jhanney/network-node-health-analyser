@@ -5,13 +5,13 @@ public class NodeClass {
 	private String id;
 	private int latencyMs;
 	private double packetLoss; 
-	private String status;
+	private Status status;
 	
 	public NodeClass() {
 		
 	}
 	
-	public NodeClass(String id, int latencyMs, double packetLoss, String status) {
+	public NodeClass(String id, int latencyMs, double packetLoss, Status status) {
 		super();
 		this.id = id;
 		this.latencyMs = latencyMs;
@@ -43,11 +43,11 @@ public class NodeClass {
 		this.packetLoss = packetLoss;
 	}
 
-	public String getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	} 
 	

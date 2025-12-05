@@ -2,6 +2,7 @@ package Services;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputFilter.Status;
 import java.lang.runtime.ObjectMethods;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,12 +16,14 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import App.Main;
+import Models.HealthStatus;
 import Models.NodeClass;
 
 public class NodeService {
 
 	private double healthScore;
-	private String healthStatus;
+	private Status status;
+	private String healthStatus; 
 
 	// Creating Scanner class object
     Scanner scn = new Scanner(System.in);
@@ -38,29 +41,18 @@ public class NodeService {
 		}
 	}
 
-	// determine health score
-//	public double calculateHealthScore(double latencyMs, double packetLoss, int statusPenalty) {
-//		//calculation
-//		healthScore = 100
-//				- latencyMs * 0.1
-//                - packetLoss * 5
-//                - statusPenalty;
-//		
-//		
-//		return healthScore;				
-//	}
 
 	// determine by passing in whole node
 	public double calculateHealthScore(NodeClass node) {
-		int penalty = switch (node.getStatus()) {
-		case "OK" -> 0;
-		case "WARN" -> 10;
-		case "ERROR" -> 25;
-		default -> 15;
-		};
+//		int penalty = switch (node.getStatus()) {
+//		case "OK" -> 0;
+//		case "WARN" -> 10;
+//		case "ERROR" -> 25;
+//		default -> 15;
+//		};
 
 		// calculation
-		healthScore = 100 - node.getLatencyMs() * 0.1 - node.getPacketLoss() - penalty;
+		healthScore = 100 - node.getLatencyMs() * 0.1 - node.getPacketLoss() - status.getPenalty();
 
 		return healthScore;
 	}
@@ -122,9 +114,9 @@ public class NodeService {
 		});
 	}
 	
+	//sort nodes depending on user choice
 	public void sortNodes(List<NodeClass> list, int choice) {
-		
-		
+			
 		switch(choice) {
 		  case 1: sortById(list); break; 
 		  case 2: sortByScore(list); break;
